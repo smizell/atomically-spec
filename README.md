@@ -1,6 +1,6 @@
 # Atomic API Design
 
-Atomic API Design is an approach to designing APIs that enables authors to write the smallest parts of the API and use tooling to fill in the other details.
+Atomic API Design is an approach to designing APIs that enables authors to write the smallest parts of the API and use tooling to fill in the other details. It is an approach that follows the follows the [Language-Oriented Approach to API Development](https://smizell.com/language-oriented-approach/).
 
 ## How it works
 
