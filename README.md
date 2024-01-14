@@ -19,17 +19,17 @@ Atomic API Design is an approach to designing APIs that enables authors to write
 ### Stack (object)
 
 - `schema` ([Reference](#reference-object), required) - A reference to an atomic schmea component, which MUST be a JSON Schema where the `type` is `object`. The tooling will use this to generate the additional needed schemas.
-- `filters` (array[[Reference](#reference-object)]) - An array of references to parameter components that will be added to the `list` operation
+- `filters` (array of [Reference](#reference-object)) - An array of references to parameter components that will be added to the `list` operation
 - `supported` (array[string]), values: `create`, `read`, `update`, `delete`, `list` - An array of supported operations. By default, all of the operations are supported.
 - `custom` (object) - Custom operations that allow for adding functionality beyond the default supported operations
   - `[custom-operation-name]` (object) - A custom operation that defines a request schema for the operation. The name MUST be in PascalCase. The response schema will match the response of the `create` operation.
     - `requestSchema` ([Reference](#reference-object)) - A reference to a schema component defining the request body JSON Schema
 - `stacks` (object) - Nested stacks
-  - `[stack-name]` ([Stack](#stack-object) | [Reference](#reference-object)) - The name of the atomic stack, which must be in PascalCase. It may be a `[Stack](#stack-object)` or a `[Reference](#reference-object)` to a stack.
+  - `[stack-name]` ([Stack](#stack-object) | [Reference](#reference-object)) - The name of the atomic stack, which must be in PascalCase. It may be a [Stack](#stack-object) or a [Reference](#reference-object) to a stack.
    
 ### Reference (object)
    
-A `Reference` is an OpenAPI reference, which is an object with a single property `$ref` and a JSON Pointer to the referenced object.
+A Reference is an OpenAPI reference, which is an object with a single property `$ref` and a JSON Pointer to the referenced object.
 
 - `$ref` (string) - JSON Pointer to the referenced object
 
