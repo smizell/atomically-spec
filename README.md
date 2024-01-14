@@ -74,7 +74,7 @@ info:
 tags:
 - name: Customer
 x-atomic:
-  molecules:
+  stacks:
     Customer:
       schema:
         $ref: "#/components/schemas/Customer"
