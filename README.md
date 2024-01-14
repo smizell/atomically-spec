@@ -10,22 +10,22 @@ Atomic API Design is an approach to designing APIs that enables authors to write
 
 ## Specification
 
-### OpenAPI Extension
+### Atomic OpenAPI Extension (Object)
 
 - `x-atomic` (object)
   - `stacks` (object)
-    - `[stack-name]` (Stack) - The name of the atomic stack, which must be in PascalCase
+    - `[stack-name]` ([Stack](#stack-object)) - The name of the atomic stack, which must be in PascalCase
    
 ### Stack (object)
 
-- `schema` (Reference, required) - A reference to an atomic schmea component, which MUST be a JSON Schema where the `type` is `object`. The tooling will use this to generate the additional needed schemas.
-- `filters` (array[Reference]) - An array of References to parameter components that will be added to the `list` operation
+- `schema` ([Reference](#reference-object), required) - A reference to an atomic schmea component, which MUST be a JSON Schema where the `type` is `object`. The tooling will use this to generate the additional needed schemas.
+- `filters` (array[[Reference](#reference-object)]) - An array of references to parameter components that will be added to the `list` operation
 - `supported` (array[string]), values: `create`, `read`, `update`, `delete`, `list` - An array of supported operations. By default, all of the operations are supported.
 - `custom` (object) - Custom operations that allow for adding functionality beyond the default supported operations
   - `[custom-operation-name]` (object) - A custom operation that defines a request schema for the operation. The name MUST be in PascalCase. The response schema will match the response of the `create` operation.
-    - `requestSchema` (Reference) - A reference to a schema component defining the request body JSON Schema
+    - `requestSchema` ([Reference](#reference-object)) - A reference to a schema component defining the request body JSON Schema
 - `stacks` (object) - Nested stacks
-  - `[stack-name]` (Stack | Reference) - The name of the atomic stack, which must be in PascalCase. It may be a `Stack` or a reference to a stack.
+  - `[stack-name]` ([Stack](#stack-object) | [Reference](#reference-object)) - The name of the atomic stack, which must be in PascalCase. It may be a `[Stack](#stack-object)` or a `[Reference](#reference-object)` to a stack.
    
 ### Reference (object)
    
