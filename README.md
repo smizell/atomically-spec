@@ -1,10 +1,33 @@
 # Atomic API Design
 
-Atomic API Design is an approach to designing APIs that enables authors to write the smallest possible units and let tooling fill in the details
+Atomic API Design is an approach to designing APIs that enables authors to write the smallest parts of the API and use tooling to fill in the other details.
 
-# Example
+## How it works
 
-## Base Document
+1. **Write the atomic components**: Atomic components are the domain schemas and parameters of your API design. The schema components leave out technical details like URLs and HTTP methods along with non-domain properties like `id` fields and timestamps. The parameter components define filters your consumers will use to interact with collections in your API.
+2. **Group the atomic components as atomic stacks**: Atomic stacks combine the atomic components into defintion that tooling will use to generate the full API design. Atomic stacks define the core schema and the filter parameters and provide configurations used by the tooling to generate the necessary OpenAPI operations.
+3. **Generate the rest of the OpenAPI document**: Tooling will take the atomic stacks and generate the create, read, update, delete, and list operations in OpenAPI, all with the correct URL structure, HTTP methods, and status codes. It will generate additional schemas and parameters that aren't required to write but are needed to build the final design.
+
+## Specification
+
+- `stacks` (object)
+  - `[stack-name]` (object) - The name of the atomic stack, which must be in PascaCase
+    - `schema` (Reference, required) - A reference to an atomic schmea component, which MUST be a JSON Schema where the `type` is `object`
+    - `filters` (array[Reference]) - An array of References to parameter components that will be added to the `list` operation
+    - `supported` (array[string]), values: `create`, `read`, `update`, `delete`, `list` - An array of supported operations. By default, all of the operations are supported.
+    - `custom` (object)
+      - `[custom-operation-name]` (object) - A custom operation that defines a request schema for the operation. The response schema will match the response of the `create` operation.
+        - `requestSchema` (Reference) - A reference to a schema component defining the request body JSON Schema
+   
+A `Reference` is an OpenAPI reference, which is an object with a single property `$ref` and a JSON Pointer to the referenced object.
+
+- `$ref` (string) - JSON Pointer to the referenced object
+
+## Example
+
+### Base Document
+
+This document defines the atomic components as normal OpenAPI components. It then uses the `x-atomic` OpenAPI Extension to define the atomic stacks.
 
 ```yaml
 openapi: 3.1.0
@@ -13,7 +36,7 @@ info:
   description: Example
   version: 1.0.0
 x-atomic:
-  molecules:
+  stacks:
     Customer:
       schema:
         $ref: "#/components/schemas/Customer"
@@ -38,7 +61,9 @@ components:
           type: boolean
 ```
 
-## Generated document
+### Generated document
+
+This is a conservative definition on what a generated OpenAPI document might look like. It will generate paths and other details that match the defined API standards.
 
 ```yaml
 openapi: 3.1.0
@@ -75,6 +100,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+        404:
+          description: File not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         500:
           description: Server Error
           content:
@@ -99,6 +130,12 @@ paths:
                 $ref: "#/components/schemas/CustomerItem"
         400:
           description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        404:
+          description: File not found
           content:
             application/json:
               schema:
@@ -135,6 +172,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+        404:
+          description: File not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         500:
           description: Server Error
           content:
@@ -163,6 +206,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+        404:
+          description: File not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         500:
           description: Server Error
           content:
@@ -178,6 +227,12 @@ paths:
           description: No Content
         400:
           description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        404:
+          description: File not found
           content:
             application/json:
               schema:
