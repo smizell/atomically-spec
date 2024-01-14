@@ -11,12 +11,12 @@ Atomic API Design is an approach to designing APIs that enables authors to write
 ## Specification
 
 - `stacks` (object)
-  - `[stack-name]` (object) - The name of the atomic stack, which must be in PascaCase
+  - `[stack-name]` (object) - The name of the atomic stack, which must be in PascalCase
     - `schema` (Reference, required) - A reference to an atomic schmea component, which MUST be a JSON Schema where the `type` is `object`
     - `filters` (array[Reference]) - An array of References to parameter components that will be added to the `list` operation
     - `supported` (array[string]), values: `create`, `read`, `update`, `delete`, `list` - An array of supported operations. By default, all of the operations are supported.
     - `custom` (object)
-      - `[custom-operation-name]` (object) - A custom operation that defines a request schema for the operation. The response schema will match the response of the `create` operation.
+      - `[custom-operation-name]` (object) - A custom operation that defines a request schema for the operation. The name MUST be in PascalCase. The response schema will match the response of the `create` operation.
         - `requestSchema` (Reference) - A reference to a schema component defining the request body JSON Schema
    
 A `Reference` is an OpenAPI reference, which is an object with a single property `$ref` and a JSON Pointer to the referenced object.
