@@ -8,6 +8,14 @@ Atomic API Design is an approach to designing APIs that enables authors to write
 2. **Group the atomic components as atomic stacks**: Atomic stacks combine the atomic components into defintion that tooling will use to generate the full API design. Atomic stacks define the core schema and the filter parameters and provide configurations used by the tooling to generate the necessary OpenAPI operations.
 3. **Generate the rest of the OpenAPI document**: Tooling will take the atomic stacks and generate the create, read, update, delete, and list operations in OpenAPI, all with the correct URL structure, HTTP methods, and status codes. It will generate additional schemas and parameters that aren't required to write but are needed to build the final design.
 
+## Benefits and tradeoffs
+
+The goal of this approach is to make it easier for people to learn how to design APIs and to make the API design process faster and more iterative. This Atomic API Design approach accomplishes this goal by limiting the parts of the OpenAPI specification an API designer must know, along with allowing the designer to rely on tooling to make sure their API design conforms to their organization's API standards. This stands in contrast to the approaches that require designers to learn a significant portion of the OpenAPI specification along with the details for writing a conformant OpenAPI document, which often requires additional tooling like linters to make designers are following the standards correctly.
+
+The main tradeoff of this Atomic API Design approach is that this requires organizations to develop tooling that generates OpenAPI documents. This takes time, resources, and expertise. The hope is that this Atomic API Design project can minimize these tradeoffs.
+
+You can read more [benefits](https://smizell.com/language-oriented-approach/benefits) and [tradeoffs](https://smizell.com/language-oriented-approach/tradeoffs) in the [Language-Oriented Approach to API Development](https://smizell.com/language-oriented-approach/).
+
 ## Specification
 
 ### Atomic OpenAPI Extension (Object)
