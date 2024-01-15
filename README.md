@@ -21,6 +21,7 @@ You can read more [benefits](https://smizell.com/language-oriented-approach/bene
 ### Atomic OpenAPI Extension (Object)
 
 - `x-atomic` (object)
+  - `version`: `"0.1.0"`
   - `stacks` (object)
     - `[stack-name]` ([Stack](#stack-object)) - The name of the atomic stack, which must be in PascalCase
    
@@ -32,8 +33,6 @@ You can read more [benefits](https://smizell.com/language-oriented-approach/bene
 - `custom` (object) - Custom operations that allow for adding functionality beyond the default supported operations
   - `[custom-operation-name]` (object) - A custom operation that defines a request schema for the operation. The name MUST be in PascalCase. The response schema will match the response of the `create` operation.
     - `requestSchema` ([Reference](#reference-object)) - A reference to a schema component defining the request body JSON Schema
-- `stacks` (object) - Nested stacks
-  - `[stack-name]` ([Stack](#stack-object) | [Reference](#reference-object)) - The name of the atomic stack, which must be in PascalCase. It may be a [Stack](#stack-object) or a [Reference](#reference-object) to a stack.
    
 ### Reference (object)
    
@@ -54,6 +53,7 @@ info:
   description: Example
   version: 1.0.0
 x-atomic:
+  version: 0.1.0
   stacks:
     Customer:
       schema:
@@ -92,6 +92,7 @@ info:
 tags:
 - name: Customer
 x-atomic:
+  version: 0.1.0
   stacks:
     Customer:
       schema:
