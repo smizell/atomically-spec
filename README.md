@@ -2,6 +2,8 @@
 
 Atomically is an approach to designing APIs that enables authors to write the smallest parts of an OpenAPI document and use tooling to fill in the other details. It is an approach that follows the follows the [Language-Oriented Approach to API Development](https://smizell.com/language-oriented-approach/).
 
+Use the [Atomically](https://github.com/smizell/atomically-py) tool for this workflow.
+
 ## How it works
 
 1. **Write the atomic components**: Atomic components are the domain schemas and parameters of your API design. The schema components leave out technical details like URLs and HTTP methods along with non-domain properties like `id` fields and timestamps. The parameter components define filters your consumers will use to interact with collections in your API.
