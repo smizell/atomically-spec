@@ -22,7 +22,7 @@ You can read more [benefits](https://smizell.com/language-oriented-approach/bene
 
 ### Atomic OpenAPI Extension (Object)
 
-- `x-atomic` (object)
+- `x-atomically` (object)
   - `version`: `"0.1.0"`
   - `stacks` (object)
     - `[stack-name]` ([Stack](#stack-object)) - The name of the atomic stack, which must be in PascalCase
@@ -47,7 +47,7 @@ A Reference is an OpenAPI reference, which is an object with a single property `
 
 ### Base Document
 
-This document defines the atomic components as normal OpenAPI components. It then uses the `x-atomic` OpenAPI Extension to define the atomic stacks.
+This document defines the atomic components as normal OpenAPI components. It then uses the `x-atomically` OpenAPI Extension to define the atomic stacks.
 
 ```yaml
 openapi: 3.1.0
@@ -55,7 +55,7 @@ info:
   title: Example
   description: Example
   version: 1.0.0
-x-atomic:
+x-atomically:
   version: 0.1.0
   stacks:
     Customer:
@@ -346,7 +346,7 @@ paths:
       - Customer
 tags:
 - name: Customer
-x-atomic:
+x-atomically:
   stacks:
     Customer:
       filters:
